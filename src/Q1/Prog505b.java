@@ -7,6 +7,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Prog505b {
+    static class Baseball {
+        private int[][] HandB;
+
+        public Baseball() {
+
+        }
+    }
     public static void main(String[] args) {
         int[][] hitsAndBats = new int[7][2];
         String[] days = new String[7];
