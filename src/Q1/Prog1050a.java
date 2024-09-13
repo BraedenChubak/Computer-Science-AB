@@ -43,6 +43,9 @@ public class Prog1050a {
             System.out.println("High priority sales shipped more than 3 days late: " + computeHighPriorityLateSales(records));
             System.out.println("Country with the highest profit on Personal Care Items: " + computeHighestProfit(records, 2, "Personal Care"));
             System.out.println("Region that bought the most Snacks: " + computeMaxByField(records, 2, "Snacks", 0));
+            System.out.print("Deleting all sales to Kuwait...\t");
+            deleteSalesCountry(records, 1, "Kuwait");
+            System.out.println("All sales to Kuwait deleted successfully.");
             // TODO: the rest
         }
     }
@@ -162,6 +165,18 @@ public class Prog1050a {
         }
 
         return topRegion;
+    }
+
+    public static void limitSales() {
+
+    }
+
+    public static void deleteSalesCountry(List<SalesRecord> records, int fIndex, String country) {
+        for (var record : records) {
+            if (record.fields[fIndex].equalsIgnoreCase(country)) {
+                records.remove(record);
+            }
+        }
     }
 }
 /*
