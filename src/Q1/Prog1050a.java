@@ -46,7 +46,20 @@ public class Prog1050a {
             System.out.print("Deleting all sales to Kuwait...\t");
             deleteSalesCountry(records, 1, "Kuwait");
             System.out.println("All sales to Kuwait deleted successfully.");
-            // TODO: the rest
+            System.out.print("We have run out of Office Supplies, Deleting all sales of Office Supplies...");
+            deleteSalesItemType(records, 2, "Office Supplies");
+            System.out.println("All sales of Office Supplies deleted successfully.");
+            System.out.println("Total # of sales to Sub-Saharan Africa: " + totalSalesRegion(records, 0, "Sub-Saharan Africa"));
+            double profitBefore = totalProfit(records, 13);
+            System.out.print("Deleting Low Priority Sales to Sub-Saharan Africa... ");
+            deleteLowPrioritySalesRegion(records, 0, "Sub-Saharan Africa");
+            System.out.println("All Low Priority Sales to Sub-Saharan Africa Deleted successfully");
+            System.out.print("Limiting Cosmetics Sales to Uganda to 100... ");
+            limitSalesItemTypeAndCountry(records, 2, "Cosmetics", 1, "Uganda", 100);
+            System.out.println("Cosmetics Sales to Uganda Limited!");
+            double profitAfter = totalProfit(records, 13);
+            System.out.println("The total profit lost from the Trade War is: " + moneyFormat.format(profitBefore-profitAfter));
+            // limit cosmetics to Uganda to 100, then find difference in total profit after the African changes
         }
     }
 
@@ -172,9 +185,58 @@ public class Prog1050a {
     }
 
     public static void deleteSalesCountry(List<SalesRecord> records, int fIndex, String country) {
+        for (int i = 0; i < records.size(); i++) {
+            if (records.get(i).fields[fIndex].equalsIgnoreCase(country)) {
+                records.remove(records.get(i));
+                i--;
+            }
+        }
+    }
+
+    public static void deleteSalesItemType(List<SalesRecord> records, int fIndex, String itemType) {
+        for (int i = 0; i < records.size(); i++) {
+            if (records.get(i).fields[fIndex].equalsIgnoreCase(itemType)) {
+                records.remove(records.get(i));
+                i--;
+            }
+        }
+    }
+
+    public static int totalSalesRegion(List<SalesRecord> records, int fIndex, String region) {
+        int count = 0;
         for (var record : records) {
-            if (record.fields[fIndex].equalsIgnoreCase(country)) {
-                records.remove(record);
+            if (record.fields[fIndex].equalsIgnoreCase(region)) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static double totalProfit(List<SalesRecord> records, int fIndex) {
+        double profit = 0;
+        for (var record : records) {
+            profit += Double.parseDouble(record.fields[fIndex]);
+        }
+        return profit;
+    }
+
+    public static void deleteLowPrioritySalesRegion(List<SalesRecord> records, int fIndex, String region) {
+        for (int i = 0; i < records.size(); i++) {
+            if (records.get(i).fields[fIndex].equalsIgnoreCase(region) && records.get(i).fields[5].equalsIgnoreCase("L")) {
+                records.remove(records.get(i));
+                i--;
+            }
+        }
+    }
+
+    public static void limitSalesItemTypeAndCountry(List<SalesRecord> records, int fIndex, String itemType, int fIndex2, String country, int limit) {
+        int count = 0;
+        for (int i = 0; i < records.size(); i++) {
+            if (records.get(i).fields[fIndex].equalsIgnoreCase(itemType) && records.get(i).fields[fIndex2].equalsIgnoreCase(country)) {
+                if (count > limit) {
+                    records.remove(records.get(i));
+                }
+                count++;
             }
         }
     }
@@ -188,4 +250,10 @@ Fruits profit lost in 2012: $67,345,418.37
 High priority sales shipped more than 3 days late: 115166
 Country with the highest profit on Personal Care Items: Iceland
 Region that bought the most Snacks: Sub-Saharan Africa
+Deleting all sales to Kuwait...	All sales to Kuwait deleted successfully.
+We have run out of Office Supplies, Deleting all sales of Office Supplies...All sales of Office Supplies deleted successfully.
+Total # of sales to Sub-Saharan Africa: 119553
+Deleting Low Priority Sales to Sub-Saharan Africa... All Low Priority Sales to Sub-Saharan Africa Deleted successfully
+Limiting Cosmetics Sales to Uganda to 100... Cosmetics Sales to Uganda Limited!
+The total profit lost from the Trade War is: $103,649,644.71
  */
