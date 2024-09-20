@@ -27,7 +27,7 @@ public class SortingAlgorithms {
             var key = arr[i];
             int j = i-1;
             while (j >= 0 && arr[j].compareTo(key) > 0) {
-
+                // TODO: finish this
             }
         }
     }
