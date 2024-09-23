@@ -23,12 +23,14 @@ public class SortingAlgorithms {
 
 
     public static <T extends Comparable<T>> void insertionSort(T[] arr) {
-        for (i = 1; i < arr.length; i++) {
+        for (int i = 1; i < arr.length; i++) {
             var key = arr[i];
             int j = i-1;
             while (j >= 0 && arr[j].compareTo(key) > 0) {
-                // TODO: finish this
+                arr[j+1] = arr[j];
+                j--;
             }
+            arr[j+1] = key;
         }
     }
 
@@ -37,8 +39,26 @@ public class SortingAlgorithms {
         for (int i = 0; i < arr.length-1; i++) {
             int minIndex = i;
             var min = arr[i];
-            if (arr[i].compareTo(min) < 0) { min = arr[i]; }
-
+            for (int j = i+1; j < arr.length; j++) {
+                if (arr[j].compareTo(arr[minIndex]) < 0) { minIndex = j; }
+            }
+            swap(arr, minIndex, i);
         }
     }
 }
+/*
+Unsorted	Bubble	Insertion	Selection
+4			0		0			0
+2			1		1			1
+5			2		2			2
+14			3		3			3
+3			4		4			4
+18			5		5			5
+0			6		6			6
+9			7		7			7
+6			9		9			9
+7			11		11			11
+11			14		14			14
+15			15		15			15
+1			18		18			18
+ */
