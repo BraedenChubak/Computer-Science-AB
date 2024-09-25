@@ -17,7 +17,7 @@ public class SearchAlgorithms {
     }
 
     public static <T extends Comparable<T>> int binarySearchRecursive(T[] arr, T target) {
-        return binarySearchRecursive(arr, target, 0, arr.length);
+        return binarySearchRecursive(arr, target, 0, arr.length-1);
     }
 
     public static <T extends Comparable<T>> int binarySearchRecursive(T[] arr, T target, int low, int high) {
