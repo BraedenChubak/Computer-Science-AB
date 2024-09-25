@@ -28,8 +28,8 @@ public class DynamicArray<T extends Comparable<T>> implements Iterable<T> {
     public void add(T element) {
         if (size == capacity) {
             resize(2 * capacity);
-            array[size++] = element;
         }
+        array[size++] = element;
     }
 
     public T remove(int index) {
@@ -48,7 +48,7 @@ public class DynamicArray<T extends Comparable<T>> implements Iterable<T> {
     public boolean isEmpty() { return size == 0; }
     public int indexOf(T element) { return SearchAlgorithms.linearSearch(array, element); }
     public boolean contains(T element) { return indexOf(element) != -1; }
-    public void sort() { SortingAlgorithms.insertionSort(array); } // TODO: replace with quicksort
+    public void sort() { SortingAlgorithms.insertionSort(array, size); } // TODO: replace with quicksort
     public String toString() { return Arrays.toString(Arrays.copyOf(array, size)); }
 
     public Iterator<T> iterator() {
@@ -56,7 +56,7 @@ public class DynamicArray<T extends Comparable<T>> implements Iterable<T> {
             private int index = 0;
             public boolean hasNext() { return index < size; }
             public T next() { return array[index++]; }
-        }
+        };
 
     }
 }
