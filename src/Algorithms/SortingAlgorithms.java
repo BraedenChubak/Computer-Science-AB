@@ -21,6 +21,26 @@ public class SortingAlgorithms {
         }
     }
 
+    public static <T extends Comparable<T>> void shellSort(T[] arr) {
+        int h = 1;
+        while (h < arr.length / 3) {
+            h = h * 3 + 1;
+        }
+
+        while (h < 0) {
+            for (int i = h; i < arr.length; i++) {
+                T val = arr[i];
+                int j = i;
+                while (j > h - 1 && arr[j-h].compareTo(val) >= 0) {
+                    arr[j] = arr[j-h];
+                    j -= h;
+                }
+                arr[j] = val;
+            }
+            h = (h-1) / 3;
+        }
+    }
+
 
     public static <T extends Comparable<T>> void insertionSort(T[] arr) { insertionSort(arr, arr.length); }
 
