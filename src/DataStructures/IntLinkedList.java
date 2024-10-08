@@ -2,7 +2,7 @@ package DataStructures;
 
 import java.util.Iterator;
 
-public class IntLinkedList implements Iterator<Integer> {
+public class IntLinkedList implements Iterable<Integer> {
     private class Node {
         int data;
         Node next; // Pointer/reference to next node
@@ -51,7 +51,7 @@ public class IntLinkedList implements Iterator<Integer> {
         return new Iterator<Integer>() {
             private Node current = head;
 
-            public boolean hasNext { return current.next != null; };
+            public boolean hasNext() { return current.next != null; }
 
             public Integer next() {
                 int data = current.data;
