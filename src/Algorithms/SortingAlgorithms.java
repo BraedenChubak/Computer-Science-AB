@@ -27,7 +27,7 @@ public class SortingAlgorithms {
             h = h * 3 + 1;
         }
 
-        while (h < 0) {
+        while (h > 0) {
             for (int i = h; i < arr.length; i++) {
                 T val = arr[i];
                 int j = i;
