@@ -95,6 +95,18 @@ public class IntLinkedList implements Iterable<Integer> {
         return node;
     }
 
+    public IntLinkedList getReverse() {
+        IntLinkedList reverse = new IntLinkedList();
+        Node current = head;
+        Node startRev = head;
+        while (startRev.next != null) {
+            startRev = startRev.next;
+        }
+        for (int i = 0; i < this.size()-1; i++) {
+
+        }
+    }
+
     public void removeFirst() {
         head = head.next;
     }
