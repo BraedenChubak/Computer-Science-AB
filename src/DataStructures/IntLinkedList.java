@@ -49,6 +49,13 @@ public class IntLinkedList implements Iterable<Integer> {
             current.next = newNode;
             newNode.next = temp;
         }
+        if (pos == this.size()) {
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
     }
 
     public int getFirst() { return head.data; }
@@ -102,9 +109,12 @@ public class IntLinkedList implements Iterable<Integer> {
         while (startRev.next != null) {
             startRev = startRev.next;
         }
+        reverse.addFront(startRev.data);
         for (int i = 0; i < this.size()-1; i++) {
-
+            reverse.add(current.data, 1);
+            current = current.next;
         }
+        return reverse;
     }
 
     public void removeFirst() {
@@ -114,27 +124,33 @@ public class IntLinkedList implements Iterable<Integer> {
     public void removeLast() {
         Node current = head;
         while (current.next.next != null) {
-            head = current.next;
+            current = current.next;
         }
         current.next = null;
     }
 
     public void removeIndex(int index) {
         Node current = head;
-        for (int i = 0; i < index-1; i++) {
-            current = current.next;
+        if (index == 0) {
+            head = current.next;
+        } else {
+            for (int i = 0; i < index-1; i++) {
+                current = current.next;
+            }
+            current.next = current.next.next;
         }
-        current.next = current.next.next;
     }
 
     public void sort() {
         IntLinkedList sorted = new IntLinkedList();
-        for (int i = 0; i < this.size(); i++) {
+        int sizeLock = this.size();
+        for (int i = 0; i < sizeLock-1; i++) {
             int curData = this.max();
             Node max = this.getLastNodeByData(curData);
             sorted.addFront(max.data);
             this.removeIndex(lastIndexMax());
         }
+        sorted.addFront(head.data);
         head = sorted.head;
 
     }
@@ -173,6 +189,20 @@ public class IntLinkedList implements Iterable<Integer> {
             current = current.next;
         }
         System.out.println();
+    }
+
+    public int getCount() {
+        Node current = head;
+        int count = 0;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
     }
 
     public int size() {
@@ -223,6 +253,48 @@ public class IntLinkedList implements Iterable<Integer> {
         return minIndex;
     }
 
+    public int lose58() {
+        Node current = head;
+        int count58 = 0;
+        int index = 0;
+        while (current != null) {
+            if (current.data == 58) {
+                removeIndex(index);
+                count58++;
+            }
+            index++;
+            current = current.next;
+        }
+        return count58;
+    }
+
+    public int getEvenCount() {
+        Node current = head;
+        int countEven = 0;
+        while (current != null) {
+            if (current.data % 2 == 0) {
+                countEven++;
+            }
+            current = current.next;
+        }
+        return countEven;
+    }
+
+    public void removeOdds() {
+        while (this.size() != this.getEvenCount()) {
+            Node current = head;
+            int index = 0;
+            while (current != null) {
+                if (current.data % 2 == 1) {
+                    removeIndex(index);
+                    index--;
+                }
+                index++;
+                current = current.next;
+            }
+        }
+    }
+
     public int max() {
         int max = Integer.MIN_VALUE;
         Node current = head;
@@ -241,7 +313,7 @@ public class IntLinkedList implements Iterable<Integer> {
         int maxIndex = 0;
         Node current = head;
         while (current != null) {
-            if (current.data >= max) {
+            if (current.data > max) {
                 max = current.data;
                 maxIndex = curIndex;
             }
@@ -258,7 +330,7 @@ public class IntLinkedList implements Iterable<Integer> {
         int maxIndex = 0;
         Node current = head;
         while (current != null) {
-            if (current.data > max) {
+            if (current.data >= max) {
                 max = current.data;
                 maxIndex = curIndex;
             }
