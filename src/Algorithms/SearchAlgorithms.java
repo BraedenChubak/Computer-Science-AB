@@ -22,7 +22,7 @@ public class SearchAlgorithms {
 
     public static <T extends Comparable<T>> int binarySearchRecursive(T[] arr, T target, int low, int high) {
         if (low > high) { return -1; }
-        int mid = (low + high) / 2;
+        int mid = low + (high - low) / 2;
         if (arr[mid].compareTo(target) == 0) {
             return mid;
         } else if (arr[mid].compareTo(target) < 0) {
