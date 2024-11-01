@@ -25,14 +25,14 @@ public class MSOE2007_8 {
             }
             System.out.println();
         }
-        System.out.println("The following are all high points:\tRow\tCol\tAltitude");
+        System.out.println("The following are all high points:\nRow\tCol\tAltitude");
         for (int r = 1; r < rows-1; r++) {
             for (int c = 1; c < cols-1; c++) {
                 int curAlt = terrain[r][c];
                 boolean highest = true;
                 for (int i = -1; i <= 1; i++) {
                     for (int j = -1; j <= 1; j++) {
-                        if (curAlt <= terrain[r+i][c+j]) {
+                        if (curAlt < terrain[r+i][c+j]) {
                             highest = false;
                         }
                     }
@@ -44,3 +44,8 @@ public class MSOE2007_8 {
         }
     }
 }
+/*
+Row	Col	Altitude
+2	3	6
+2	5	9
+ */
