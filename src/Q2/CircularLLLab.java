@@ -16,7 +16,7 @@ public class CircularLLLab {
         list.print();
 
         try {
-            list.remove(9999999999);
+            list.remove(9999999);
         } catch (IndexOutOfBoundsException e){
             System.out.println("No such index");
         }
