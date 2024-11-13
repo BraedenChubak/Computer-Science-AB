@@ -5,13 +5,13 @@ import java.util.Scanner;
 public class dfile {
     public static void main(String[] args) {
         try {
-            var file = new Scanner(new File("Langdat/REPLACE.dat"));
+            var file1 = new Scanner(new File("Langdat/bginvtry.dat"));
 
-            while (file.hasNext()) {
+            while (file1.hasNext()) {
 
             }
 
-            file.close();
+            file1.close();
 
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
