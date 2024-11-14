@@ -24,7 +24,6 @@ public class Prog1071hStackFromQueue {
                 }
                 Transaction1071h tran = new Transaction1071h(code, quantity, value);
                 Stack.push(tran);
-                System.out.println(buySell + " " + code + " " + quantity + " " + value);
             }
             file2.close();
 
@@ -38,11 +37,42 @@ public class Prog1071hStackFromQueue {
                 Stack.push(tran);
             }
             file1.close();
-            System.out.println(Stack.size());
 
-            for (int i = 0; i < Stack.size(); i++) {
-                Transaction1071h t = Stack.pop();
-                System.out.println(t.prodCode + "\t\t" + t.quantity+ "\t\t" + t.value);
+            int s = Stack.size();
+            Stack<Transaction1071h> processedTrans = new Stack<>();
+            Stack<Transaction1071h> savedTrans = new Stack<>();
+
+            for (int i = 0; i < s; i++) {
+                Transaction1071h curTrans = Stack.pop();
+                if (curTrans.value != -1) {
+                    processedTrans.push(curTrans);
+                } else {
+                    while (curTrans.quantity > 0) {
+                        Transaction1071h lookingForCode = processedTrans.pop();
+                        if (curTrans.prodCode == lookingForCode.prodCode) {
+                            if (curTrans.quantity >= lookingForCode.quantity) {
+                                curTrans.quantity -= lookingForCode.quantity;
+                                lookingForCode.quantity = 0;
+                            } else {
+                                lookingForCode.quantity -= curTrans.quantity;
+                                curTrans.quantity = 0;
+                            }
+                        }
+                        savedTrans.push(lookingForCode);
+                    }
+                    int s2 = savedTrans.size();
+                    for (int j = 0; j < s2; j++) {
+                        processedTrans.push(savedTrans.pop());
+                    }
+                }
+            }
+            System.out.println("\nEnding Inventory");
+            s = processedTrans.size();
+            for (int i = 0; i < s; i++) {
+                Transaction1071h t = processedTrans.pop();
+                if (t.quantity != 0) {
+                    System.out.println(t.prodCode + "\t\t" + t.quantity + "\t\t" + t.value);
+                }
             }
 
 
@@ -52,3 +82,31 @@ public class Prog1071hStackFromQueue {
         }
     }
 }
+/*
+1		50		1298.0
+2		50		107.5
+3		100		248.85
+4		5000		1.07
+5		20		489.75
+6		5		586.24
+7		30		84.23
+8		600		24.73
+9		1500		19.99
+10		15		238.99
+
+Ending Inventory
+10		9		250.0
+5		2		510.25
+7		10		87.5
+4		750		1.1
+1		13		1298.0
+2		2		107.5
+3		87		248.85
+4		5000		1.07
+5		20		489.75
+6		4		586.24
+7		30		84.23
+8		600		24.73
+9		1010		19.99
+10		15		238.99
+ */
