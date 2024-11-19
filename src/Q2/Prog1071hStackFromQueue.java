@@ -9,6 +9,7 @@ import java.util.*;
 public class Prog1071hStackFromQueue {
     public static void main(String[] args) {
         try {
+            StackFromQueue<Transaction1071h> tempStack = new StackFromQueue<>();
             StackFromQueue<Transaction1071h> Stack = new StackFromQueue<>();
 
             var file2 = new Scanner(new File("Langdat/buysell.txt"));
@@ -23,9 +24,12 @@ public class Prog1071hStackFromQueue {
                     value = -1.0;
                 }
                 Transaction1071h tran = new Transaction1071h(code, quantity, value);
-                Stack.push(tran);
+                tempStack.push(tran);
             }
             file2.close();
+            while (!tempStack.isEmpty()) {
+                Stack.push(tempStack.pop());
+            }
 
             var file1 = new Scanner(new File("Langdat/bginvtry.txt"));
             while (file1.hasNext()) {
@@ -95,18 +99,20 @@ public class Prog1071hStackFromQueue {
 10		15		238.99
 
 Ending Inventory
-10		9		250.0
-5		2		510.25
-7		10		87.5
 4		750		1.1
+7		10		87.5
+2		2		111.25
+9		10		21.25
+3		15		275.55
+5		20		510.25
+10		15		250.0
 1		13		1298.0
-2		2		107.5
-3		87		248.85
+3		72		248.85
 4		5000		1.07
-5		20		489.75
+5		2		489.75
 6		4		586.24
 7		30		84.23
 8		600		24.73
-9		1010		19.99
-10		15		238.99
+9		1000		19.99
+10		9		238.99
  */
