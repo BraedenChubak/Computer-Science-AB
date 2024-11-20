@@ -71,15 +71,41 @@ public class SortingAlgorithms {
     /* ========== Merge Sort ========== */
 
     public static <T extends Comparable<T>> void mergeSort(T[] arr) {
-        mergeSort(arr, 0, arr.length-1);
+        // hint: use Arrays.copyOfRange to get an array slice
+        if (arr.length > 1) {
+            int middle = arr.length / 2;
+            T[] left = Arrays.copyOfRange(arr, 0, middle);
+            T[] right = Arrays.copyOfRange(arr, middle, arr.length);
+            mergeSort(left);
+            mergeSort(right);
+            merge(arr, left, right);
+        }
     }
 
-    public static <T extends Comparable<T>> void mergeSort(T[] arr, int l, int r) {
-
-    }
-
-    public static <T extends Comparable<T>> void mergeSort(T[] arr, int l, int m, int r) {
-
+    public static <T extends Comparable<T>> void merge(T[] arr, T[] l, T[] r) {
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        while (i < l.length && j < r.length) {
+            if (l[i].compareTo(r[j]) < 0) {
+                arr[k] = l[i];
+                i++;
+            } else {
+                arr[k] = r[j];
+                j++;
+            }
+            k++;
+        }
+        while (i < l.length) {
+            arr[k] = l[i];
+            i++;
+            k++;
+        }
+        while (j < r.length) {
+            arr[k] = r[j];
+            j++;
+            k++;
+        }
     }
 
     /* ========== Quick Sort ========== */
