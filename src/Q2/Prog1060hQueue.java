@@ -157,9 +157,10 @@ public class Prog1060hQueue {
                     }
 
                     double milesDriven = Math.round((milesAfter-milesBefore) * 100) / 100.0;
+                    double milesPrice = Math.round(milesDriven * current.rates[1] * 100) / 100.0;
                     double price = Math.round((days * current.rates[0] + milesDriven * current.rates[1]) * 100) / 100.0;
 
-                    System.out.println("INVOICE:" + "\nCar " + current.name + "\nBeginning Mileage: " + milesBefore + "\nEnding Mileage " + milesAfter + "\nMiles Driven: " + milesDriven + " @ " + current.rates[1] + " = " + (milesDriven * current.rates[1]) + "\nDays Driven: " + days + " @ " + current.rates[0] + " = " + (days * current.rates[0]) + "\nCar Type: " + current.size + "\nTotal Amt Due: $" + price);
+                    System.out.println("INVOICE:" + "\nCar " + current.name + "\nBeginning Mileage: " + milesBefore + "\nEnding Mileage " + milesAfter + "\nMiles Driven: " + milesDriven + " @ " + current.rates[1] + " = $" + (milesPrice) + "\nDays Driven: " + days + " @ " + current.rates[0] + " = $" + (days * current.rates[0]) + "\nCar Type: " + current.size + "\nTotal Amt Due: $" + price);
                     System.out.println();
                 }
                 else if (command.equals("C")) {
@@ -230,8 +231,8 @@ INVOICE:
 Car Yugo
 Beginning Mileage: 3456.3
 Ending Mileage 3640.0
-Miles Driven: 183.7 @ 0.22 = 40.413999999999994
-Days Driven: 2 @ 18.0 = 36.0
+Miles Driven: 183.7 @ 0.22 = $40.41
+Days Driven: 2 @ 18.0 = $36.0
 Car Type: S
 Total Amt Due: $76.41
 
@@ -239,8 +240,8 @@ INVOICE:
 Car Cadillac
 Beginning Mileage: 1234.5
 Ending Mileage 2801.2
-Miles Driven: 1566.7 @ 0.37 = 579.679
-Days Driven: 2 @ 34.0 = 68.0
+Miles Driven: 1566.7 @ 0.37 = $579.68
+Days Driven: 2 @ 34.0 = $68.0
 Car Type: L
 Total Amt Due: $647.68
 
@@ -248,8 +249,8 @@ INVOICE:
 Car Contour
 Beginning Mileage: 1091.7
 Ending Mileage 2031.7
-Miles Driven: 940.0 @ 0.25 = 235.0
-Days Driven: 3 @ 20.5 = 61.5
+Miles Driven: 940.0 @ 0.25 = $235.0
+Days Driven: 3 @ 20.5 = $61.5
 Car Type: C
 Total Amt Due: $296.5
 
@@ -283,6 +284,4 @@ Sentra     3007.0
 Shadow     831.2
 Topaz      412.5
 
-
-Process finished with exit code 0
  */
