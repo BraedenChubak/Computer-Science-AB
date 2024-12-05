@@ -14,7 +14,7 @@ public class MSOE2024_7 {
             length = l;
             width = w;
             height = h;
-            size = length * width * height;
+            size = Math.round(length * width * height * 1000) / 1000.0;
         }
 
         public int compareTo(Box o) {
@@ -68,7 +68,7 @@ public class MSOE2024_7 {
             }
         }
         for (Box b : maxChain) {
-            String boxString = b.length + "x" + b.width + "x" + b.height;
+            String boxString = b.length + "x" + b.width + "x" + b.height + " (" + b.size + ")";
             System.out.print(boxString + ", ");
         }
     }
@@ -100,5 +100,5 @@ public class MSOE2024_7 {
 8x9x7.2
 6x4.9x7
 
-18.0x15.4x7.4, 5.9x15.2x14.7, 9.4x9.4x9.4, 7.3x8.1x9.0,
+18.0x15.4x7.4 (2051.28), 5.9x15.2x14.7 (1318.296), 9.4x9.4x9.4 (830.584), 7.3x8.1x9.0 (532.17),
  */
