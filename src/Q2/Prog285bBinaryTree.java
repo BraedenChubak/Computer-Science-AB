@@ -14,8 +14,13 @@ public class Prog285bBinaryTree {
             var tree = new BinarySearchTree<Cl285b>();
 
             System.out.println("Id\tCode\tSales\tCommission");
+            boolean isFirst = false;
             while (file.hasNext()) {
                 int id = file.nextInt();
+                if (!isFirst) {
+                    id += 50;
+                    isFirst = true;
+                }
                 int c = file.nextInt();
                 double sales = file.nextDouble();
 
@@ -24,6 +29,7 @@ public class Prog285bBinaryTree {
             }
             file.close();
 
+            tree.delete(tree.getRootData());
             tree.printlnInOrder();
 
         } catch (IOException e) {
