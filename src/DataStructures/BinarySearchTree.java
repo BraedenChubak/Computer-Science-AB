@@ -106,4 +106,58 @@ public class BinarySearchTree<T extends Comparable<T>> {
         System.out.println(node.data);
         inorderln(node.right);
     }
+
+    public int height() {
+        return height(root);
+    }
+
+    private int height(Node node) {
+        if (node == null) { return 0; }
+        return 1 + Math.max(height(node.left), height(node.right));
+    }
+
+    public int width() {
+        return width(root);
+    }
+
+    private int width(Node node) {
+        if (node == null) { return 0; }
+        Queue<Node> queue = new Queue<>();
+        queue.enqueue(node);
+        int max = 0;
+        while (!queue.isEmpty()) {
+            int count = queue.size();
+            max = Math.max(max, count);
+            while (count --> 0) {
+                Node current = queue.dequeue();
+                if (current.left != null) { queue.enqueue(current.left); }
+                if (current.right != null) { queue.enqueue(current.right); }
+            }
+        }
+        return max;
+    }
+
+    public void breadthFirstSearch() {
+        Queue<Node> queue = new Queue<>();
+        queue.enqueue(root);
+        while (!queue.isEmpty()) {
+            Node node = queue.dequeue();
+            System.out.print(node.data + " ");
+            if (node.left != null) { queue.enqueue(node.left); }
+            if (node.right != null) { queue.enqueue(node.right); }
+        }
+        System.out.println();
+    }
+
+    public void depthFirstSearch() {
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            Node node = stack.pop();
+            System.out.print(node.data + " ");
+            if (node.right != null) { stack.push(node.right); }
+            if (node.left != null) { stack.push(node.left); }
+        }
+        System.out.println();
+    }
 }
