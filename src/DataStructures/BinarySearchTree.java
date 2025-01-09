@@ -78,6 +78,21 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return true;
     }
 
+    public T getElement(T element) {
+        return getElement(root, element);
+    }
+
+    private T getElement(Node node, T element) {
+        if (node == null) return null;
+        if (element.compareTo(node.data) < 0)
+            return getElement(node.left, element);
+        else if (element.compareTo(node.data) > 0)
+            return getElement(node.right, element);
+        else
+            return node.data;
+    }
+
+
     private Node findMin(Node node) {
         while (node.left != null) { node = node.left; }
         return node;
