@@ -1,6 +1,6 @@
 package Q2.Prog1999s;
 
-public class IngredientBatch {
+public class IngredientBatch implements Comparable<IngredientBatch> {
     private String name;
     protected int amount;
     public IngredientBatch(String name, int num) {
@@ -10,4 +10,9 @@ public class IngredientBatch {
 
     public String getName() { return name; }
     public int getAmount() { return amount; }
+
+    @Override
+    public int compareTo(IngredientBatch o) {
+        return this.name.compareTo(o.name);
+    }
 }
