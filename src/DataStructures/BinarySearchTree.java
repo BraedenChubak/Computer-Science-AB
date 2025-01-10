@@ -1,10 +1,10 @@
 package DataStructures;
 
 public class BinarySearchTree<T extends Comparable<T>> {
-    protected class Node implements Comparable<Node> {
-        T data;
-        Node left;
-        Node right;
+    public class Node implements Comparable<Node> {
+        public T data;
+        public Node left;
+        public Node right;
 
         Node(T data) {
             this.data = data;
@@ -15,7 +15,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         public int compareTo(Node o) { return data.compareTo(o.data); }
     }
 
-    protected Node root;
+    public Node root;
 
     public BinarySearchTree() {
         root = null;
@@ -33,11 +33,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
             node.right = insert(node.right, element);
         }
         return node;
-    }
-
-    public void printInOrder() {
-        inorder(root);
-        System.out.println();
     }
 
     public void delete(T element) {
@@ -103,11 +98,40 @@ public class BinarySearchTree<T extends Comparable<T>> {
         return node;
     }
 
+    public void printInOrder() {
+        inorder(root);
+        System.out.println();
+    }
+
     private void inorder(Node node) {
         if (node == null) { return; }
         inorder(node.left);
         System.out.print(node.data + " ");
         inorder(node.right);
+    }
+
+    public void printPreOrder() {
+        preOrder(root);
+        System.out.println();
+    }
+
+    private void preOrder(Node node) {
+        if (node == null) { return; }
+        System.out.print(node.data + " ");
+        preOrder(node.left);
+        preOrder(node.right);
+    }
+
+    public void printPostorder() {
+        postOrder(root);
+        System.out.println();
+    }
+
+    private void postOrder(Node node) {
+        if (node == null) { return; }
+        postOrder(node.left);
+        postOrder(node.right);
+        System.out.print(node.data + " ");
     }
 
     public void printlnInOrder() {
@@ -150,6 +174,19 @@ public class BinarySearchTree<T extends Comparable<T>> {
             }
         }
         return max;
+    }
+
+    public void invert() {
+        invert(root);
+    }
+
+    private void invert(Node node) {
+        if (node == null) { return; }
+        Node temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+        invert(node.left);
+        invert(node.right);
     }
 
     public void breadthFirstSearch() {
