@@ -97,16 +97,16 @@ public class MSOE2016_7 {
             Hint curHint = hintList[i];
             int r;
             int c;
-            if (facing % 2 == 0) {
+            int cursky = 0;
+            int numseen = 0;
+            if (curHint.facing % 2 == 0) {
                 c = curHint.rowcol;
-                int cursky = 0;
                 for (int j = 0; j < attempted.length; j++) {
 
                 }
             }
             else {
                 r = curHint.rowcol;
-                int cursky = 0;
                 for (int j = 0; j < attempted.length; j++) {
 
                 }
