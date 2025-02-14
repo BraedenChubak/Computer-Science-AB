@@ -134,20 +134,27 @@ public class SortingAlgorithms {
         swap(arr, i+1, high);
         return i+1;
     }
+
+    /* ========== Heap Sort ========== */
+    public static <T extends Comparable<T>> void heapSort(T[] arr) {
+        int n = arr.length;
+        buildMaxHeap(arr);
+        for (int i = n-1; i >= 1; i--) {
+            swap(arr, 0, i);
+            n-=1;
+            maxHeapify(arr, 0, n);
+
+        }
+    }
+
+    public static <T extends Comparable<T>> void buildMaxHeap(T[] arr) {
+        int n = arr.length;
+        for (int i = (n/2) - 1; i >= 0; i--) {
+            maxHeapify(arr, i, n);
+        }
+    }
+
+    public static <T extends Comparable<T>> void maxHeapify(T[] arr, int i, int n) {
+        // TODO
+    }
 }
-/*
-Unsorted	Bubble	Insertion	Selection
-4			0		0			0
-2			1		1			1
-5			2		2			2
-14			3		3			3
-3			4		4			4
-18			5		5			5
-0			6		6			6
-9			7		7			7
-6			9		9			9
-7			11		11			11
-11			14		14			14
-15			15		15			15
-1			18		18			18
- */
