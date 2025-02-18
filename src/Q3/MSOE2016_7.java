@@ -71,7 +71,7 @@ public class MSOE2016_7 {
         int error2count = 0;
         for (int i = 0; i < attempted.length; i++) {
             for (int j = 0; j < attempted.length; j++) {
-                boolean containsAll = true;
+                boolean containsAll = false;
                 if (attempted[i][j] == 0) {
                     ArrayList<Integer> curNums = new ArrayList<>();
                     for (int k = 0; k < attempted.length; k++) {
@@ -81,11 +81,11 @@ public class MSOE2016_7 {
                         }
                     }
                     for (int k = 1; k < attempted.length; k++) {
-                        if (!curNums.contains(k)) { containsAll = false; }
+                        if (!curNums.contains(k)) { containsAll = true; }
                     }
-                }
-                if (containsAll) {
-                    error2count++;
+                    if (containsAll) {
+                        error2count++;
+                    }
                 }
             }
         }
@@ -97,21 +97,68 @@ public class MSOE2016_7 {
             Hint curHint = hintList[i];
             int r;
             int c;
-            int cursky = 0;
+            int curheight = 0;
             int numseen = 0;
+            boolean nozeros = true;
             if (curHint.facing % 2 == 0) {
                 c = curHint.rowcol;
+                if (curHint.facing == 0) { r = 0; }
+                else { r = attempted.length-1; }
                 for (int j = 0; j < attempted.length; j++) {
-
+                    if (attempted[r][c] > curheight) {
+                        curheight = attempted[r][c];
+                        numseen++;
+                    }
+                    if (attempted[r][c] == 0) {
+                        nozeros = false;
+                    }
+                    if (curHint.facing == 0) { r++; }
+                    else { r--; }
+                }
+                if (nozeros && numseen != curHint.buildings) {
+                    error3count++;
                 }
             }
             else {
                 r = curHint.rowcol;
+                if (curHint.facing == 1) { c = 0; }
+                else { c = attempted.length-1; }
                 for (int j = 0; j < attempted.length; j++) {
-
+                    if (attempted[r][c] > curheight) {
+                        curheight = attempted[r][c];
+                        numseen++;
+                    }
+                    if (attempted[r][c] == 0) {
+                        nozeros = false;
+                    }
+                    if (curHint.facing == 1) { c++; }
+                    else { c--; }
+                }
+                if (nozeros && numseen != curHint.buildings) {
+                    error3count++;
                 }
             }
-
         }
+        System.out.println("Counts of Error 3: " + error3count);
     }
 }
+/*
+Enter size of puzzle (integer between 3 and 6 inclusive): 4
+Enter number of hints (positive integer): 7
+Enter facing, row, and buildings, separated by spaces, in that order: 0 3 1
+Enter facing, row, and buildings, separated by spaces, in that order: 1 0 4
+Enter facing, row, and buildings, separated by spaces, in that order: 1 1 2
+Enter facing, row, and buildings, separated by spaces, in that order: 1 3 2
+Enter facing, row, and buildings, separated by spaces, in that order: 2 2 3
+Enter facing, row, and buildings, separated by spaces, in that order: 2 3 2
+Enter facing, row, and buildings, separated by spaces, in that order: 3 3 2
+
+Enter attempted solution:
+Enter row 1: 1 1 0 4
+Enter row 2: 3 0 4 2
+Enter row 3: 4 3 2 1
+Enter row 4: 2 4 1 3
+Counts of Error 1: 1
+Counts of Error 2: 1
+Counts of Error 3: 0
+ */
