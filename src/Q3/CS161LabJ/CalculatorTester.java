@@ -1,3 +1,5 @@
+package Q3.CS161LabJ;
+
 /**
  * Tests an AddingMachine
  * 
