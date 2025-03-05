@@ -143,7 +143,6 @@ public class SortingAlgorithms {
             swap(arr, 0, i);
             n-=1;
             maxHeapify(arr, 0, n);
-
         }
     }
 
@@ -155,6 +154,18 @@ public class SortingAlgorithms {
     }
 
     public static <T extends Comparable<T>> void maxHeapify(T[] arr, int i, int n) {
-        // TODO
+        int largest = i;
+        int left = 2*i+1;
+        int right = 2*i+2;
+        if (left < n && arr[left].compareTo(arr[largest]) > 0) {
+            largest = left;
+        }
+        if (right < n && arr[right].compareTo(arr[largest]) > 0) {
+            largest = right;
+        }
+        if (largest != i) {
+            swap(arr, i, largest);
+            maxHeapify(arr, largest, n);
+        }
     }
 }
