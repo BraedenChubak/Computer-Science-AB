@@ -59,7 +59,7 @@ public class Set<T extends Comparable<T>> implements Iterable<T> {
 
     public void insert(T key) {
         // TODO: if (contains(key)) return;
-        if(size >= table.length % DEFAULT_LOAD_FACTOR) { resize(2 * table.length); }
+        if(size >= table.length * DEFAULT_LOAD_FACTOR) { resize(2 * table.length); }
         int index = getIndex(key);
         Entry<T> entry = new Entry<>(key);
         if (table[index] == null) {
