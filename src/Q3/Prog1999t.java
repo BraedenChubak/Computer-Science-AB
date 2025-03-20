@@ -34,6 +34,8 @@ public class Prog1999t {
             // TODO: read in eel stuff
 
             var bunnies = new CircularLinkedList<Bunny>();
+
+
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
