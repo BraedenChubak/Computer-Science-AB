@@ -38,7 +38,7 @@ public class Prog1060zPrioQ {
                     // TODO (pop)
                 } else { // Add
                     char priority = info.charAt(1);
-                    int job = Integer.parseInt(into.substring(2));
+                    int job = Integer.parseInt(info.substring(2));
                     pq.enqueue(new Job(job, priority));
                 }
             }
