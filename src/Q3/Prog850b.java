@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Prog850a {
+public class Prog850b {
     public static void main(String[] args) {
         try {
             var file = new Scanner(new File("Langdat/prog850b.txt"));
